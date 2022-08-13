@@ -1,0 +1,327 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Roboto:ital,wght@0,500;1,400&display=swap');
+
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+.chfull{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.chnavbar{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: auto;
+    height: 10%;
+    padding: 20px 15px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    background-color: rgba(255, 255, 255, 0.419);
+    backdrop-filter: blur(20px);
+    box-shadow: inset 0px 0px 20px white;
+    border: none;
+    border-radius: 30px;
+
+
+}
+@media (max-width:576px) {
+    .chnavbar{
+        
+        height: 55px;
+    }
+}
+ @media (min-width:577px) and (max-width:991px) {
+    .chnavbar{
+        height: 70px;
+    }
+} 
+.userprofilename{
+    background-color:rgb(120, 2, 255) ;
+    color: white;
+    border: none;
+    border-radius: 50px;
+    padding: 5px 12px;
+    margin-right: 10px;
+    text-transform: capitalize;
+    font-weight: 500;
+}
+
+   
+.chhome{
+    margin-right: 10px;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    background-color: rgb(192, 2, 255) ;
+    color: white;
+    padding: 8px;
+    border: none;
+    border-radius: 50px;
+    
+}
+.chhome:hover{
+    background-color: rgb(120, 2, 255);
+}
+.chhome:active{
+    transform: scale(0.9);
+}
+.chcontainer{
+    width: 85%;
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    padding: 15px;
+    margin-bottom: 10px;
+    border: none;
+    border-radius: 30px;
+    background-color: rgba(255, 255, 255, 0.601);
+    backdrop-filter: blur(20px);
+    box-shadow: inset 0px 0px 20px white;
+}
+@media (max-width : 576px) {
+    .chcontainer{
+        width: 90%;
+        height: 85%;
+    }
+
+}
+@media (max-width : 992px) {
+    .chcontainer{
+        width: 90%;
+        height: 85%;
+    }
+
+}
+
+
+
+.chtitle{
+    font-family: 'Poppins', sans-serif;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    color: rgb(192, 2, 255);
+    text-transform: capitalize;
+}
+   
+
+
+.msgarea{
+    width: 100%;
+    height: 100%;
+    outline: none;
+    border: none;
+    overflow-y: scroll;
+    margin-bottom: 20px;
+    padding: 13px;
+    padding-bottom: 0px;
+    position: fixed;
+}
+
+@media (max-width : 992px) {
+    .msgarea{
+       font-size: 25px;
+    }
+
+}
+
+.mymsgbox{
+    max-width: 90%;
+    text-align: right;
+    outline: none;
+    border: none;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-right: 0px;
+    overflow-wrap: break-word;
+}
+.mymsg{
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 20px;
+    color: rgb(192, 2, 255);
+}
+.othermsgbox{
+    max-width: 90%;
+    text-align: left;
+    border: none;
+    outline: none;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    overflow-wrap: break-word;
+    
+}
+
+.othermsg{
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 20px;
+    color: rgb(120, 2, 255);
+    margin-top: 5px;
+}
+
+.typing{
+    max-width: 40%;
+    text-align: left;
+    border: none;
+    outline: none;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    overflow-wrap: break-word;
+}
+.media{
+    width: 50%;
+    margin-top: 5px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border: none;
+    border-radius: 10px;
+}
+@media (max-width : 576px) {
+    .media{
+        width: 80%;
+    }
+
+}
+@media (max-width : 992px) {
+    .media{
+        width: 70%;
+    }
+
+}
+.pdfbox{
+    width: 50%;
+    margin-top: 5px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border: none;
+    border-radius: 10px;
+}
+@media (max-width : 992px) {
+    .pdfbox{
+        display: none;
+    }
+
+}
+.mydownload{
+    text-decoration: none;
+    background-color: rgb(192, 2, 255);
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 50px;
+}
+.mydownload:hover{
+    background-color:rgb(120, 2, 255);
+    color: white;
+    text-decoration: none;
+}
+.otherdownload{
+    text-decoration: none;
+    background-color: rgb(120, 2, 255);
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 50px;
+}
+.otherdownload:hover{
+    background-color: rgb(192, 2, 255);
+    color: white;
+    text-decoration: none;
+}
+.downloadicon{
+    display: inline-block;
+    border: none;
+    border-radius: 50px;
+    justify-content: center;
+    align-items: center;
+    padding-left: 3px;
+    margin:5px;
+}
+
+
+.typingarea{
+    width: 100%;
+    padding: 5px 10px;
+    border: none;
+    outline: none;
+    border-radius: 50px;
+    background-color: transparent;
+  
+    
+}
+@media (max-width : 992px) {
+    .typingarea{
+       font-size: 20px;
+    }
+
+}
+
+.btnclr{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color:rgb(192, 2, 255) ;
+    border: none;
+    outline: none;
+    padding: 0px 10px;
+    border-radius: 5px;
+    color: white;
+   
+}
+.btnclr:hover{
+    background-color: rgb(131, 0, 253);
+    
+}
+.btnclr:active{
+    transform: scale(0.9);
+}
+.attachmentbtn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(120, 2, 255); ;
+    border: none;
+    outline: none;
+    padding: 0px 10px;
+    border-radius: 50px;
+    text-decoration: none;
+    color: white;
+}
+.attachmentbtn:hover{
+    background-color:rgb(192, 2, 255) ;
+}
+.attachmentbtn:active{
+    transform: scale(0.9);
+}
+
+.previewmediabox{
+    width: auto;
+    max-width: 60%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(192, 2, 255);
+    border: none;
+    border-radius: 20px 20px 5px 5px ;
+    color: white;
+    padding: 5px 10px;
+    font-weight: 500;
+    position: relative;
+}
+
+.previewmediaclose{
+    border: none;
+    outline: none;
+    font-weight: 700;
+    position: absolute;
+    right: 10px;
+    transform: rotate(45deg);
+    cursor: pointer;
+}

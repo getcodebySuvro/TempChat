@@ -1,16 +1,75 @@
-import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import React, { useState,useEffect } from 'react'
+import { useNavigate,useLocation } from 'react-router-dom'
+import {io} from "socket.io-client";
+import {AiOutlineStepBackward} from 'react-icons/ai'
+import "./Mainform.css"
+
 
 const Mainform = () => {
+    const location = useLocation();
     const navigate = useNavigate()
     const [error,setError] = useState("")
-    const[data,setData] = useState({name:"",room:""})
-    const Handlechange = (e)=>{
+    const[data,setData] = useState({name:"",room:"",reciever:"",allmsgg:[]})
+    const[name,setName] = useState("");
+    const [socket,setSocket] = useState();
+    const [users,setUsers] = useState({});
+    const[gotoprivate,setGotoprivate]=useState(false);
+    const[sender,setNotificationSender] = useState("");
+    const [ reciever,setNotificationReciever] = useState("");
+    const [notificationcount,setNotificationcount] = useState();
+    const [allmsg,setallMsg] = useState([]);
+
+    useEffect(()=>{
+        
+        const socket = io("https://tempchatbackendsuvro.herokuapp.com/");
+        setSocket(socket)
+        socket.on("all_users",(users)=>{
+           
+          setUsers(users);
+           },[])
+
+         
+
+        },[])
+
+        useEffect(()=>{
+            if(socket){
+                socket.on("setnotification",(sender,reciever,newmsg,room)=>{
+                 
+                    if(name===reciever){
+                        setNotificationSender(sender);
+                        setNotificationReciever(reciever);
+                        allmsg.push(newmsg)
     
+                        if(gotoprivate===false){
+                            var count = allmsg.filter((alm)=>alm.name===sender)
+                            setNotificationcount(count.length);
+                        }
+                    }
+                   
+                    
+                })
+            } },[socket])
+       
+        useEffect(()=> {
+            
+            setName(location.state);
+            setData({
+                ...data,
+                 ["name"]:location.state
+             })
+            
+        },[location])
+
+       
+
+ const Handlechange = (e)=>{
+        
         setData({
             ...data,
             [e.target.name] : e.target.value
         })
+     
     }
 
     const validation = () => {
@@ -22,41 +81,106 @@ const Mainform = () => {
             setError("Please select room")
             return false;
         }
+      
+      
         setError("")
         return true;
     }
+
+  
+
      
     const submitHandler = (e)=>{
         e.preventDefault()
-        const isvalidate = validation()
+      
+         const isvalidate = validation()
         if(isvalidate){
             navigate(`/chat/${data.room}`, {state:data})
         }
+     }
+     const orderId = (user)=>{
+        if(users[name]>users[user]){
+            return users[name] + "-" + users[user];
+        }
+        else{
+            return users[user] + "-" + users[name];
+        }
+     }
 
-    }
+    
+
+     const privatechat =  (user)=>{
+        if(sender===user || !notificationcount){
+            setGotoprivate(true)
+        
+        const room = orderId(user);
+
+        
+         setData({
+            ["name"]: name,
+            ["room"] : room,
+            ["reciever"] : user,
+            ["allmsgg"] : allmsg,
+        })
+        }
+        
+       
+        
+        
+     }
+     useEffect(()=>{
+        if(gotoprivate)
+        navigate(`/chat/${data.room}`, {state:data})
+     },[gotoprivate])
 
   return (
-    <div className='px-2 py-3 shadow bg-light text-dark border rounded row'>
+    <div className='chfull'>
+         <div className='chnavbar'>
+    <span className='chhome' onClick={()=>{navigate('/', {state:name})}} title="Go to Home">
+        <AiOutlineStepBackward/>
+    </span>
+    <span className='userprofilename' title="Your Name">{name}</span>
+    </div>
+    <div className='formcontainer'>
+       <div className='userstitlebox'>
+       <div className='userstitle'>Online Users</div>
+       </div>
+       
+        <div className='userbox'>
+            
+        {users && Object.keys(users).map((user,index)=>{
+            return (
+                <div  key={index}>
+                {
+                    name === user ?  null : <span className="onlineusers" name="room" onClick={()=>privatechat(user)}>{user}<span className={notificationcount &&  (sender===user && name===reciever ) ? "notification" : null}>{notificationcount &&  (sender===user && name===reciever ) ? notificationcount : null}</span></span>
+                }
+                </div>
+            )
+        })}
+        </div>
+         
+        
         <form onSubmit={submitHandler}>
-            <div className='form-group mb-4'>
-                <h2 className='text-primary mb-4'>Welcome to Chatty</h2>
-            </div>
-            <div className='form-group mb-4'>
-                <input type='text' className='form-control bg-light' name='name' placeholder='Enter your name' onChange={Handlechange}/>
-            </div>
-            <div className='form-group mb-4'>
-                <select className='form-select bg-light' name='room' onChange={Handlechange}>
-                    <option value=''>Select Room</option>
+            
+            
+            <div>
+                <select className='select' name='room' onChange={Handlechange}>
+                    <option value='' className='selectarea'>SELECT ROOM</option>
                     <option value='gaming'>Gaming</option>
                     <option value='coding'>Coding</option>
                     <option value='social media'>Social Media</option>
                 </select>
             </div>
-            <button type='submit' className='btn btn-warning w-100 mb-2' >Submit</button>
-            {error ? <small className='text-danger'>{error}</small> : ""}
+            
+            
+
+            <button type='submit' className='buttn' >SUBMIT</button>
+            {error ? <div><small className='text-danger'>{error}</small></div> : ""}
         </form>
       
     </div>
+    </div>
+   
   )
 }
 
